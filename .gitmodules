@@ -1,0 +1,9 @@
+[submodule "fa/Font-Awesome"]
+	path = fa/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome.git
+[submodule "input/fa/Font-Awesome"]
+	path = input/fa/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome.git
+[submodule "input/mui/material-ui"]
+	path = input/mui/material-ui
+	url = https://github.com/FortAwesome/Font-Awesome.git

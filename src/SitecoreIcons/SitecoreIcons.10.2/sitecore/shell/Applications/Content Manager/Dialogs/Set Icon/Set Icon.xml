@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
+	<SetIcon>
+		<FormDialog Header="Change Icon" Submittable="false" Text="Click the new icon that you want to assign to the selected item.">
+
+			<CodeBeside Type="SitecoreIcons.SetIconForms,SitecoreIcons.10.2"/>
+			<Script Src="/sitecore/shell/Applications/Content Manager/Dialogs/Set Icon/SetIcon.js" />
+			<Stylesheet>
+				#TabStrip {
+				padding-bottom: 50px;
+				}
+
+				.ie #RecentList {
+				width: 100% !important;
+				}
+				#tabcontent_Recent td {vertical-align:top;}
+				.scRecentIcon {
+				cursor: pointer;
+				margin: 5px 5px 5px 0;
+				}
+
+				#List {
+				position: absolute;
+				top: 65px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow: auto;
+				padding: 10px 0 10px 5px;
+				}
+
+				#List > div {
+				border: 0 !important;
+				}
+
+				.iconFileName {
+				padding-top: 8px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				}
+			</Stylesheet>
+			<div class="scStretch">
+				<VerticalTabstrip ID="TabStrip">
+					<Tab ID="Recent" Header="Recent">
+						<GridPanel Width="100%" Height="100%" Fixed="true">
+							<Scrollbox ID="RecentList" Class="scScrollbox scFixSize scFixSize8 scKeepFixSize" Height="100%" GridPanel.Height="100%" Border="none" Click="javascript:scClick(this,event)"/>
+						</GridPanel>
+					</Tab>
+
+					<Tab ID="Icons" Header="Icons">
+						<div class="scStretch">
+							<Border Padding="0 5px 15px 5px">
+								<Combobox ID="Selector" Change="javascript:scChange(this,event)">
+									<ListItem Header="Applications" Value="Applications"/>
+									<ListItem Header="Apps" Value="Apps"/>
+									<ListItem Header="Business" Value="Business"/>
+									<ListItem Header="Controls" Value="Controls"/>
+									<ListItem Header="Core 1" Value="Core1" />
+									<ListItem Header="Core 2" Value="Core2"/>
+									<ListItem Header="Core 3" Value="Core3" />
+									<ListItem Header="Database" Value="Database"/>
+									<ListItem Header="Flags" Value="Flags"/>
+									<ListItem Header="Imaging" Value="Imaging"/>
+									<ListItem Header="LaunchPad Icons" Value="LaunchPadIcons"/>
+									<ListItem Header="Multimedia" Value="Multimedia"/>
+									<ListItem Header="Network" Value="Network" />"
+									<ListItem Header="Office" Value="Office" />
+									<ListItem Header="Office White" Value="OfficeWhite" />
+									<ListItem Header="Other" Value="Other" />
+									<ListItem Header="People" Value="People" />
+									<ListItem Header="Software" Value="Software" />
+									<ListItem Header="Word Processing" Value="WordProcessing"/>
+									<ListItem Header="Font Awesome" Value="FA"/>
+									<ListItem Header="Material Icons" Value="MUI"/>
+								</Combobox>
+							</Border>
+							<Border Padding="0 5px" style="font-weight:600;">
+								<Literal Text="Icons:"/>
+							</Border>
+							<Border ID="List" Click="javascript:scClick(this,event)">
+								<Scrollbox ID="ApplicationsList" Border="none"/>
+								<Scrollbox ID="AppsList" Visible="false"/>
+								<Scrollbox ID="BusinessList" Visible="false" />
+								<Scrollbox ID="ControlsList" Visible="false" />
+								<Scrollbox ID="Core1List" Visible="false" />
+								<Scrollbox ID="Core2List" Visible="false" />
+								<Scrollbox ID="Core3List" Visible="false" />
+								<Scrollbox ID="DatabaseList" Visible="false" />
+								<Scrollbox ID="FlagsList" Visible="false" />
+								<Scrollbox ID="ImagingList" Visible="false" />
+								<Scrollbox ID="LaunchPadIconsList" Visible="false" />
+								<Scrollbox ID="MultimediaList" Visible="false" />
+								<Scrollbox ID="NetworkList" Visible="false" />
+								<Scrollbox ID="OfficeList" Visible="false" />
+								<Scrollbox ID="OfficeWhiteList" Visible="false" />
+								<Scrollbox ID="OtherList" Visible="false" />
+								<Scrollbox ID="PeopleList" Visible="false" />
+								<Scrollbox ID="SoftwareList" Visible="false" />
+								<Scrollbox ID="WordProcessingList" Visible="false" />
+								<Scrollbox ID="FAList" Visible="false" />
+								<Scrollbox ID="MUIList" Visible="false" />
+							</Border>
+						</div>
+					</Tab>
+				</VerticalTabstrip>
+
+				<GridPanel class="iconFileName scFormTable" Columns="2">
+					<Literal Text="Icon:"/>
+					<Edit ID="IconFile"/>
+				</GridPanel>
+			</div>
+		</FormDialog>
+	</SetIcon>
+</control>
