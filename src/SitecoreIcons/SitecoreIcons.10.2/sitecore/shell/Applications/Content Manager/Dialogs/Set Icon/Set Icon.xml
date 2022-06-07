@@ -73,6 +73,10 @@
 									<ListItem Header="Software" Value="Software" />
 									<ListItem Header="Word Processing" Value="WordProcessing"/>
 									<ListItem Header="Font Awesome" Value="FA"/>
+									<ListItem Header="Font Awesome Black" Value="FABlack"/>
+									<ListItem Header="Font Awesome Blue" Value="FABlue"/>
+									<ListItem Header="Font Awesome Green" Value="FAGreen"/>
+									<ListItem Header="Font Awesome Red" Value="FARed"/>
 									<ListItem Header="Material Icons" Value="MUI"/>
 								</Combobox>
 							</Border>
@@ -100,6 +104,10 @@
 								<Scrollbox ID="SoftwareList" Visible="false" />
 								<Scrollbox ID="WordProcessingList" Visible="false" />
 								<Scrollbox ID="FAList" Visible="false" />
+								<Scrollbox ID="FABlackList" Visible="false" />
+								<Scrollbox ID="FABlueList" Visible="false" />
+								<Scrollbox ID="FAGreenList" Visible="false" />
+								<Scrollbox ID="FARedList" Visible="false" />
 								<Scrollbox ID="MUIList" Visible="false" />
 							</Border>
 						</div>

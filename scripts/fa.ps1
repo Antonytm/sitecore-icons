@@ -1,5 +1,6 @@
 $path = "../input/fa/Font-Awesome/svgs";
-$output = "../output/fa/"
+$output = "../output/"
+$prefix = "fa-";
 $temp = "../temp/";
 $files = Get-ChildItem -Path $path -Recurse -File | Where-Object { $_.Extension -eq '.svg' }
 
@@ -19,7 +20,7 @@ $colors = @{
 
 $colors.Keys | ForEach-Object {
     $colorName = $_
-    $colorFolder = $output + $colorName
+    $colorFolder = $output + $prefix + $colorName
     New-Item -Path $colorFolder -ItemType Directory
     $ouputSizes | ForEach-Object{
         #Create folder for output images
@@ -55,8 +56,8 @@ $files | ForEach-Object {
         $colorValue = $colors.Item($colorName)
         
         $newXml = $SvgContent.Replace("<path", "<path fill=`"$colorValue`"")
-        Write-Host $newXml
-        Write-Host $SvgContent
+        #Write-Host $newXml
+        #Write-Host $SvgContent
         Remove-Item -Path $tempXml -Force
         New-Item -Path $tempXml -ItemType File -Value $newXml
 
@@ -67,7 +68,7 @@ $files | ForEach-Object {
 
         $ouputSizes | ForEach-Object {
             $size = $_.ToString() + "x" + $_.ToString()
-            $folder = $output + "\\" + $colorName + "\\" + $size
+            $folder = $output + "\\" + $prefix + $colorName + "\\" + $size
             $outputPath = $folder + "\\" + $filename
             ../tools/magick/convert $inputPath -transparent white -resize $size $outputPath
         }

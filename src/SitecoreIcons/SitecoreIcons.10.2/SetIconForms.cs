@@ -25,6 +25,10 @@ namespace SitecoreIcons
     public class SetIconForms : SetIconForm
     {
         protected Scrollbox FAList { get; set; }
+        protected Scrollbox FAGreenList { get; set; }
+        protected Scrollbox FABlueList { get; set; }
+        protected Scrollbox FABlackList { get; set; }
+        protected Scrollbox FARedList { get; set; }
         protected Scrollbox MUIList { get; set; }
 
         /// <summary>Raises the load event.</summary>
@@ -85,6 +89,10 @@ namespace SitecoreIcons
             RenderIcons(WordProcessingList, "WordProcessing");
             RenderIcons(FAList, "FA");
             RenderIcons(MUIList, "MUI");
+            RenderIcons(FABlackList, "fa-green");
+            RenderIcons(FABlueList, "fa-blue");
+            RenderIcons(FAGreenList, "fa-green");
+            RenderIcons(FARedList, "fa-red");
         }
 
 
