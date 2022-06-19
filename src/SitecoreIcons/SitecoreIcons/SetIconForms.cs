@@ -24,12 +24,14 @@ namespace SitecoreIcons
 {
     public class SetIconForms : SetIconForm
     {
-        protected Scrollbox FAList { get; set; }
         protected Scrollbox FAGreenList { get; set; }
         protected Scrollbox FABlueList { get; set; }
         protected Scrollbox FABlackList { get; set; }
         protected Scrollbox FARedList { get; set; }
-        protected Scrollbox MUIList { get; set; }
+        protected Scrollbox MUIBlackList { get; set; }
+        protected Scrollbox MUIBlueList { get; set; }
+        protected Scrollbox MUIRedList { get; set; }
+        protected Scrollbox MUIGreenList { get; set; }
 
         /// <summary>Raises the load event.</summary>
         /// <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
@@ -87,9 +89,11 @@ namespace SitecoreIcons
             RenderIcons(PeopleList, "People");
             RenderIcons(SoftwareList, "Software");
             RenderIcons(WordProcessingList, "WordProcessing");
-            RenderIcons(FAList, "FA");
-            RenderIcons(MUIList, "MUI");
-            RenderIcons(FABlackList, "fa-green");
+            RenderIcons(MUIBlackList, "mui-black");
+            RenderIcons(MUIBlueList, "mui-blue");
+            RenderIcons(MUIGreenList, "mui-green");
+            RenderIcons(MUIRedList, "mui-red");
+            RenderIcons(FABlackList, "fa-black");
             RenderIcons(FABlueList, "fa-blue");
             RenderIcons(FAGreenList, "fa-green");
             RenderIcons(FARedList, "fa-red");

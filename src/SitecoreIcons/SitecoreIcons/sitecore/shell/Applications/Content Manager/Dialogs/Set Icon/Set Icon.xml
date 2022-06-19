@@ -72,12 +72,14 @@
 									<ListItem Header="People" Value="People" />
 									<ListItem Header="Software" Value="Software" />
 									<ListItem Header="Word Processing" Value="WordProcessing"/>
-									<ListItem Header="Font Awesome" Value="FA"/>
 									<ListItem Header="Font Awesome Black" Value="FABlack"/>
 									<ListItem Header="Font Awesome Blue" Value="FABlue"/>
 									<ListItem Header="Font Awesome Green" Value="FAGreen"/>
 									<ListItem Header="Font Awesome Red" Value="FARed"/>
-									<ListItem Header="Material Icons" Value="MUI"/>
+									<ListItem Header="Material Icons Black" Value="MUIBlack"/>
+									<ListItem Header="Material Icons Blue" Value="MUIBlue"/>
+									<ListItem Header="Material Icons Green" Value="MUIGreen"/>
+									<ListItem Header="Material Icons Red" Value="MUIRed"/>
 								</Combobox>
 							</Border>
 							<Border Padding="0 5px" style="font-weight:600;">
@@ -108,7 +110,10 @@
 								<Scrollbox ID="FABlueList" Visible="false" />
 								<Scrollbox ID="FAGreenList" Visible="false" />
 								<Scrollbox ID="FARedList" Visible="false" />
-								<Scrollbox ID="MUIList" Visible="false" />
+								<Scrollbox ID="MUIBlackList" Visible="false" />
+								<Scrollbox ID="MUIBlueList" Visible="false" />
+								<Scrollbox ID="MUIGreenList" Visible="false" />
+								<Scrollbox ID="MUIRedList" Visible="false" />
 							</Border>
 						</div>
 					</Tab>
