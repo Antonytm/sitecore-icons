@@ -37,4 +37,11 @@ jobs:
     - name: Publish Project
       run: |
         msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile=FolderProfile
+
+    - name: Download ImageMagick
+      run: |
+        curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-portable-Q16-x64.zip -o tools\imagemagick.zip
         
+    - name: Unzip ImageMagick using 7zip
+      run: |
+        7z x tools\imagemagick.zip -o tools\imagemagick
