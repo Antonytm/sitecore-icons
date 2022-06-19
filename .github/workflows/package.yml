@@ -21,7 +21,7 @@ jobs:
       run: cd $GITHUB_WORKSPACE
     
     - name: Add Sitecore Nuget Feed
-      run: nuget.exe add -name Sitecore -source https://sitecore.myget.org/F/sc-packages/api/v3/index.json
+      run: nuget.exe sources add -name Sitecore -source https://sitecore.myget.org/F/sc-packages/api/v3/index.json
 
     - name: Restore Packages
       run: nuget restore src/SitecoreIcons/SitecoreIcons.sln
@@ -29,3 +29,8 @@ jobs:
     - name: Build Solution
       run: |
         msbuild.exe src/SitecoreIcons/SitecoreIcons.sln /p:Configuration=Debug
+
+    - name: Publish Project
+      run: |
+        msbuild.exe src/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile FolderProfile
+        
