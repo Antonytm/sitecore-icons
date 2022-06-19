@@ -44,4 +44,4 @@ jobs:
         
     - name: Unzip ImageMagick using 7zip
       run: |
-        7z x tools\imagemagick.zip -o tools\imagemagick
+        7z x tools\imagemagick.zip
