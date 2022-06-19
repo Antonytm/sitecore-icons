@@ -39,7 +39,7 @@ jobs:
         msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile=FolderProfile
 
     - name: Remove Roslyn FolderProfile
-      run: rm -rf package/files/bin/roslyn
+      run: rmdir /s /q "package/files/bin/roslyn"
 
     - name: Download ImageMagick
       run: |
