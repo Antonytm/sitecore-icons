@@ -3,7 +3,7 @@
 	<SetIcon>
 		<FormDialog Header="Change Icon" Submittable="false" Text="Click the new icon that you want to assign to the selected item.">
 
-			<CodeBeside Type="SitecoreIcons.SetIconForms,SitecoreIcons.10.2"/>
+			<CodeBeside Type="SitecoreIcons.SetIconForms,SitecoreIcons"/>
 			<Script Src="/sitecore/shell/Applications/Content Manager/Dialogs/Set Icon/SetIcon.js" />
 			<Stylesheet>
 				#TabStrip {

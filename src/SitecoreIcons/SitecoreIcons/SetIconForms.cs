@@ -129,60 +129,69 @@ namespace SitecoreIcons
         /// <param name="area">The area.</param>
         private static void DrawIcons(string prefix, string img, string area)
         {
-            string[] files = GetFiles(prefix);
-            int num = files.Length;
-            if (num == 0)
+            try
             {
-                num = 1;
-            }
-            int height = (num / 24 + ((num % 24 != 0) ? 1 : 0)) * 40;
-            using (Bitmap bitmap = new Bitmap(960, height, PixelFormat.Format32bppArgb))
-            {
-                if (prefix == "OfficeWhite")
+                string[] files = GetFiles(prefix);
+                int num = files.Length;
+                if (num == 0)
                 {
-                    Graphics graphics = Graphics.FromImage(bitmap);
-                    graphics.FillRectangle(Brushes.DarkGray, 0, 0, 960, height);
+                    num = 1;
                 }
 
-                HtmlTextWriter htmlTextWriter = new HtmlTextWriter(new StringWriter());
-                htmlTextWriter.WriteLine("<map name=\"" + prefix + "\">");
-                string text = prefix + "/32x32/";
-                int num2 = 0;
-                using (Graphics graphics2 = Graphics.FromImage(bitmap))
+                int height = (num / 24 + ((num % 24 != 0) ? 1 : 0)) * 40;
+                using (Bitmap bitmap = new Bitmap(960, height, PixelFormat.Format32bppArgb))
                 {
-                    string[] array = files;
-                    foreach (string text2 in array)
+                    if (prefix == "OfficeWhite")
                     {
-                        int num3 = num2 % 24;
-                        int num4 = num2 / 24;
-                        string themedImageSource = Images.GetThemedImageSource(text + text2, ImageDimension.id32x32);
-                        try
-                        {
-                            using (Bitmap image = (Settings.Icons.UseZippedIcons
-                                ? new Bitmap(ZippedIcon.GetStream(text + text2, ZippedIcon.GetZipFile(text)))
-                                : new Bitmap(FileUtil.MapPath(themedImageSource))))
-                            {
-                                graphics2.DrawImage(image, num3 * 40 + 4, num4 * 40 + 4, 32, 32);
-                            }
+                        Graphics graphics = Graphics.FromImage(bitmap);
+                        graphics.FillRectangle(Brushes.DarkGray, 0, 0, 960, height);
+                    }
 
-                            string arg = $"{num3 * 40 + 4},{num4 * 40 + 4},{num3 * 40 + 36},{num4 * 40 + 36}";
-                            string arg2 =
-                                StringUtil.Capitalize(Path.GetFileNameWithoutExtension(text2).Replace("_", " "));
-                            htmlTextWriter.WriteLine(
-                                "<area shape=\"rect\" coords=\"{0}\" href=\"#\" alt=\"{1}\" sc_path=\"{2}\"/>", arg,
-                                arg2, text + text2);
-                            num2++;
-                        }
-                        catch (Exception exception)
+                    HtmlTextWriter htmlTextWriter = new HtmlTextWriter(new StringWriter());
+                    htmlTextWriter.WriteLine("<map name=\"" + prefix + "\">");
+                    string text = prefix + "/32x32/";
+                    int num2 = 0;
+                    using (Graphics graphics2 = Graphics.FromImage(bitmap))
+                    {
+                        string[] array = files;
+                        foreach (string text2 in array)
                         {
-                            Log.Warn("Unable to open icon " + themedImageSource, exception, typeof(SetIconForm));
+                            int num3 = num2 % 24;
+                            int num4 = num2 / 24;
+                            string themedImageSource =
+                                Images.GetThemedImageSource(text + text2, ImageDimension.id32x32);
+                            try
+                            {
+                                using (Bitmap image = (Settings.Icons.UseZippedIcons
+                                    ? new Bitmap(ZippedIcon.GetStream(text + text2, ZippedIcon.GetZipFile(text)))
+                                    : new Bitmap(FileUtil.MapPath(themedImageSource))))
+                                {
+                                    graphics2.DrawImage(image, num3 * 40 + 4, num4 * 40 + 4, 32, 32);
+                                }
+
+                                string arg = $"{num3 * 40 + 4},{num4 * 40 + 4},{num3 * 40 + 36},{num4 * 40 + 36}";
+                                string arg2 =
+                                    StringUtil.Capitalize(Path.GetFileNameWithoutExtension(text2).Replace("_", " "));
+                                htmlTextWriter.WriteLine(
+                                    "<area shape=\"rect\" coords=\"{0}\" href=\"#\" alt=\"{1}\" sc_path=\"{2}\"/>", arg,
+                                    arg2, text + text2);
+                                num2++;
+                            }
+                            catch (Exception exception)
+                            {
+                                Log.Warn("Unable to open icon " + themedImageSource, exception, typeof(SetIconForm));
+                            }
                         }
                     }
-                }
 
-                htmlTextWriter.WriteLine("</map>");
-                FileUtil.WriteToFile(area, htmlTextWriter.InnerWriter.ToString());
-                bitmap.Save(img, ImageFormat.Png);
+                    htmlTextWriter.WriteLine("</map>");
+                    FileUtil.WriteToFile(area, htmlTextWriter.InnerWriter.ToString());
+                    bitmap.Save(img, ImageFormat.Png);
+                }
+            }
+            catch (Exception exception)
+            {
+                Sitecore.Diagnostics.Log.Error("Issue with drawing Sitecore Icons", exception);
             }
         }
 
@@ -229,21 +238,28 @@ namespace SitecoreIcons
         /// <param name="output">The output.</param>
         private static void WriteImageTag(string img, string prefix, HtmlTextWriter output)
         {
-            Assert.ArgumentNotNull(img, "img");
-            Assert.ArgumentNotNull(prefix, "prefix");
-            Assert.ArgumentNotNull(output, "output");
-            ImageBuilder imageBuilder;
-            using (Bitmap bitmap = new Bitmap(img))
+            try
             {
-                imageBuilder = new ImageBuilder
+                Assert.ArgumentNotNull(img, "img");
+                Assert.ArgumentNotNull(prefix, "prefix");
+                Assert.ArgumentNotNull(output, "output");
+                ImageBuilder imageBuilder;
+                using (Bitmap bitmap = new Bitmap(img))
                 {
-                    Src = FileUtil.UnmapPath(img),
-                    Width = bitmap.Width,
-                    Height = bitmap.Height,
-                    Usemap = "#" + prefix
-                };
+                    imageBuilder = new ImageBuilder
+                    {
+                        Src = FileUtil.UnmapPath(img),
+                        Width = bitmap.Width,
+                        Height = bitmap.Height,
+                        Usemap = "#" + prefix
+                    };
+                }
+                output.WriteLine(imageBuilder.ToString());
             }
-            output.WriteLine(imageBuilder.ToString());
+            catch (Exception exception)
+            {
+                Sitecore.Diagnostics.Log.Error("Issue with drawing Sitecore Icons", exception);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreIcons.10.2", "SitecoreIcons.10.2\SitecoreIcons.10.2.csproj", "{654D336D-57F9-4028-8ADA-02044ED775A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitecoreIcons", "SitecoreIcons\SitecoreIcons.csproj", "{7F8F8DF0-B55C-48AC-AB8B-F81F66F438FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,16 +11,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{654D336D-57F9-4028-8ADA-02044ED775A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{654D336D-57F9-4028-8ADA-02044ED775A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{654D336D-57F9-4028-8ADA-02044ED775A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{654D336D-57F9-4028-8ADA-02044ED775A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F8F8DF0-B55C-48AC-AB8B-F81F66F438FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F8F8DF0-B55C-48AC-AB8B-F81F66F438FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F8F8DF0-B55C-48AC-AB8B-F81F66F438FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F8F8DF0-B55C-48AC-AB8B-F81F66F438FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Caching.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.ServiceBus.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Configuration.6.0.1304.0\lib\NET45
 		SolutionGuid = {57C651EE-FE04-4865-9D72-588556981E31}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Caching.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.ServiceBus.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Configuration.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal
