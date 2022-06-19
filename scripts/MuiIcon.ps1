@@ -19,7 +19,9 @@ $match.Matches | ForEach-Object {
 }
 $newXml = $newXml.Replace("height=`"24`" viewBox=`"0 0 24 24`" width=`"24`"", "height=`"512`" viewBox=`"0 0 24 24`" width=`"512`"")
 
-Remove-Item -Path $OutputPath -Force
+if(Test-Path -Path $OutputPath) {
+  Remove-Item -Path $OutputPath -Force
+}
 New-Item -Path $OutputPath -ItemType File -Value $newXml
 
   
