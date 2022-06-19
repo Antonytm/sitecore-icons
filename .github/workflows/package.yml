@@ -48,7 +48,9 @@ jobs:
 
     - name: Run Icons build
       run: |
-        .\scripts\main.ps1
+        cd scripts
+        .\main.ps1
+        cd ..
 
     - name: Zip Sitecore package
       run: |
