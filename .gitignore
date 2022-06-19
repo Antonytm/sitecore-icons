@@ -4,3 +4,7 @@
 /src/SitecoreIcons/packages
 /src/SitecoreIcons/SitecoreIcons.10.2/bin
 /src/SitecoreIcons/SitecoreIcons.10.2/obj
+/src/SitecoreIcons/SitecoreIcons/bin
+/src/SitecoreIcons/SitecoreIcons/obj
+/src/SitecoreIcons/SitecoreIcons/Properties/PublishProfiles/*.user
+/output - Copy
