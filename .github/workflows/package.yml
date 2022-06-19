@@ -36,5 +36,5 @@ jobs:
 
     - name: Publish Project
       run: |
-        msbuild.exe src/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile=FolderProfile
+        msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile=FolderProfile
         
