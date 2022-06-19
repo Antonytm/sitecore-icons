@@ -1,0 +1,27 @@
+<project>
+  <Metadata>
+    <metadata>
+      <PackageName>Font Awesome and MUI Icons</PackageName>
+      <Author>Anton Tishchenko</Author>
+      <Version>1.0.0</Version>
+      <Revision />
+      <License />
+      <Comment />
+      <Attributes />
+      <Readme>Readme</Readme>
+      <Publisher>Anton Tishchenko</Publisher>
+      <PostStep />
+      <PackageID />
+    </metadata>
+  </Metadata>
+  <SaveProject>True</SaveProject>
+  <Sources />
+  <Converter>
+    <TrivialConverter>
+      <Transforms />
+    </TrivialConverter>
+  </Converter>
+  <Include />
+  <Exclude />
+  <Name />
+</project>
