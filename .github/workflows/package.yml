@@ -9,7 +9,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
     
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
