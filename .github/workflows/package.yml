@@ -38,10 +38,45 @@ jobs:
       run: |
         msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug /p:PublishProfile=FolderProfile
 
+    - name: Remove Roslyn FolderProfile
+      run: rm -rf package/files/bin/roslyn
+
     - name: Download ImageMagick
       run: |
         curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-portable-Q16-x64.zip -o tools\imagemagick.zip
         
     - name: Unzip ImageMagick using 7zip
       run: |
-        7z x tools\imagemagick.zip
+        7z x tools\imagemagick.zip -otools\imagemagick
+
+    - name: Run Icons build
+      run: |
+        .\scripts\main.ps1
+
+    - name: Zip Sitecore package
+      run: |
+        cd tools
+        7z a -tzip package.zip files installer metadata
+        cd ..
+
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./package/package.zip
+        asset_name: package.zip
+        asset_content_type: application/zip

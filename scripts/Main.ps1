@@ -11,6 +11,4 @@ New-Item -Path $output -ItemType Directory
 
 # ZIP icons
 
-# Build Soluiton
-
-# Prepare package
+& .\ZipIcons.ps1 -Path $output -ThemeLocation "../package/files/sitecore/shell/Themes/Standard"
