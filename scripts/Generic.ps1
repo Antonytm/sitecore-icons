@@ -11,11 +11,12 @@ $files = Get-ChildItem -Path $Path -Recurse -File | Where-Object { $_.Extension 
 
 $ouputSizes = @(16, 24, 32, 48, 128)
 
+# Colors hashset that we want to use.
 $colors = @{
     black = "#000000"
     red   = "#BE0000"
     green = "#008000"
-    blue  = "#4200D7"
+    blue  = "#00137F"
 }
 
 $colors.Keys | ForEach-Object {
