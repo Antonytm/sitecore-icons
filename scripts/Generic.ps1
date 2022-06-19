@@ -69,7 +69,7 @@ $files | ForEach-Object {
             $size = $_.ToString() + "x" + $_.ToString()
             $folder = $output + "\\" + $Prefix + $colorName + "\\" + $size
             $outputPath = $folder + "\\" + $filename
-            ../tools/magick/convert $inputPath -transparent white -resize $size $outputPath
+            ../tools/imagemagick/convert $inputPath -transparent white -resize $size $outputPath
         }
     }
 }

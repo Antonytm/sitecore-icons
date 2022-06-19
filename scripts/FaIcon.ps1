@@ -21,4 +21,4 @@ $newXml = $newXml.Replace("height=`"24`" viewBox=`"0 0 24 24`" width=`"24`"", "h
 Remove-Item -Path $TempSvg -Force
 New-Item -Path $TempSvg -ItemType File -Value $newXml
 
-../tools/magick/convert $TempSvg -gravity center -transparent white -extent $size $OutputPath
+../tools/imagemagick/convert $TempSvg -gravity center -transparent white -extent $size $OutputPath
