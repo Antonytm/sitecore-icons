@@ -9,7 +9,7 @@ $temp = "../temp/";
 
 $files = Get-ChildItem -Path $Path -Recurse -File | Where-Object { $_.Extension -eq '.svg' } | Where-Object { $_.Name -Match $Match }
 
-$ouputSizes = @(16, 24, 32, 48, 64, 128)
+$ouputSizes = @(16, 24, 32, 48, 128)
 
 $colors = @{
     black = "#000000"
