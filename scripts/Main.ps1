@@ -1,7 +1,9 @@
 $output = "../output/"
 
 # Clean up the output directory
-Remove-Item -Path $output -Force -Recurse
+if(Test-Path -Path $output) {
+  Remove-Item -Path $output -Force -Recurse
+}
 New-Item -Path $output -ItemType Directory
 
 # Process MUI Icons
