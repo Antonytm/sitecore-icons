@@ -1,12 +1,13 @@
 Param(
     [String] $Path = "",
     [String] $Prefix = "",
-    [String] $Output = "../output/"
+    [String] $Output = "../output/",
+    [String] $Match = "Filenames that should be processed"
 )
 
 $temp = "../temp/";
 
-$files = Get-ChildItem -Path $Path -Recurse -File | Where-Object { $_.Extension -eq '.svg' }
+$files = Get-ChildItem -Path $Path -Recurse -File | Where-Object { $_.Extension -eq '.svg' } | Where-Object { $_.Name -Match $Match }
 
 $ouputSizes = @(16, 24, 32, 48, 64, 128)
 
