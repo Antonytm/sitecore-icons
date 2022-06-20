@@ -95,73 +95,73 @@ jobs:
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files
-          7z a -tzip SitecoreIconsFull${env:VERSION}.zip package.zip
+          7z a -tzip SitecoreIcons-Full-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*"
-          7z a -tzip SitecoreIconsFontAwesome${env:VERSION}.zip package.zip
+          7z a -tzip SitecoreIcons-FontAwesome-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*"
-          7z a -tzip SitecoreIconsMUI.zip package.zip
+          7z a -tzip SitecoreIcons-MUI-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-blue*"
-          7z a -tzip SitecoreIconsMUIBlack.zip package.zip 
+          7z a -tzip SitecoreIcons-MUI-Black-${env:VERSION}.zip package.zip 
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-black*" "-xr!mui-red*" "-xr!mui-blue*"
-          7z a -tzip SitecoreIconsMUIGreen.zip package.zip 
+          7z a -tzip SitecoreIcons-MUI-Green-${env:VERSION}.zip package.zip 
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-black*" "-xr!mui-blue*"
-          7z a -tzip SitecoreIconsMUIRed.zip package.zip 
+          7z a -tzip SitecoreIcons-MUI-Red-${env:VERSION}.zip package.zip 
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-black*"
-          7z a -tzip SitecoreIconsMUIBlue.zip package.zip 
+          7z a -tzip SitecoreIcons-MUI-Blue-${env:VERSION}.zip package.zip 
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-blue*"
-          7z a -tzip SitecoreIconsMUIBlack.zip package.zip
+          7z a -tzip SitecoreIcons-MUI-Black-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-red*" "-xr!fa-blue*"
-          7z a -tzip SitecoreIconsFontAwesomBlack.zip package.zip
+          7z a -tzip SitecoreIcons-FontAwesome-Black-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-black*" "-xr!fa-red*" "-xr!fa-blue*"
-          7z a -tzip SitecoreIconsFontAwesomGreen.zip package.zip
+          7z a -tzip SitecoreIcons-FontAwesome-Green-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-black*" "-xr!fa-blue*"
-          7z a -tzip SitecoreIconsFontAwesomRed.zip package.zip
+          7z a -tzip SitecoreIcons-FontAwesome-Red-${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-red*" "-xr!fa-black*"
-          7z a -tzip SitecoreIconsFontAwesomBlue.zip package.zip
+          7z a -tzip SitecoreIcons-FontAwesome-Blue-${env:VERSION}.zip package.zip
           cd ..
         shell: pwsh
 
@@ -183,8 +183,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package/SitecoreIconsFull${{env.VERSION}}.zip
-          asset_name: SitecoreIconsFull${{env.VERSION}}.zip
+          asset_path: ./package/SitecoreIcons-Full-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-Full-${{env.VERSION}}.zip
           asset_content_type: application/zip
 
       - name: Upload Font Awesome Package
@@ -193,6 +193,96 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package/SitecoreIconsFontAwesome${{env.VERSION}}.zip
-          asset_name: SitecoreIconsFontAwesome${{env.VERSION}}.zip
+          asset_path: ./package/SitecoreIcons-FontAwesome-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-FontAwesome-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Font Awesome Black Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-FontAwesome-Black-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-FontAwesome-Black-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Font Awesome Blue Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-FontAwesome-Blue-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-FontAwesome-Blue-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Font Awesome Green Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-FontAwesome-Green-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-FontAwesome-Green-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Font Awesome Red Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-FontAwesome-Red${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-FontAwesome-Red-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload MUI Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-MUI-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-MUI-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload MUI Black Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-MUI-Black-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-MUI-Black-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload MUI Blue Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-MUI-Blue-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-MUI-Blue-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload MUI Green Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-MUI-Green-${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-MUI-Green-${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload MUI Red Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIcons-MUI-Red${{env.VERSION}}.zip
+          asset_name: SitecoreIcons-MUI-Red-${{env.VERSION}}.zip
           asset_content_type: application/zip
