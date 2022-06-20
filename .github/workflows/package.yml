@@ -15,9 +15,6 @@ jobs:
       - name: Set Version
         run: |
           echo "VERSION=${env:STATIC_VERSION}.${env:GITHUB_RUN_NUMBER}" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
-          Write-Host "VERSION=${env:STATIC_VERSION}.${env:GITHUB_RUN_NUMBER}"
-          Write-Host "GITHUB_RUN_NUMBER=${env:GITHUB_RUN_NUMBER}"
-          Write-Host "${env:VERSION}"
         shell: pwsh
       - name: Info
         run: |
@@ -25,6 +22,8 @@ jobs:
           Write-Host "Version: ${env:VERSION}"
         shell: pwsh
 
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Checkout submodules
         run: git submodule update --init --recursive
@@ -96,13 +95,13 @@ jobs:
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files
-          7z a -tzip SitecoreIconsFull${env:version}.zip package.zip
+          7z a -tzip SitecoreIconsFull${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*"
-          7z a -tzip SitecoreIconsFontAwesome${env:version}.zip package.zip
+          7z a -tzip SitecoreIconsFontAwesome${env:VERSION}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
