@@ -1,1 +1,1 @@
-![Package build](https://github.com/github/docs/actions/workflows/package.yml/badge.svg)
+![Package build](https://github.com/antonytm/Sitecore-Icons/actions/workflows/package.yml/badge.svg)
