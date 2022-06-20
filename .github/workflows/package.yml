@@ -70,7 +70,9 @@ jobs:
         7z a -tzip mui-blue.zip mui-blue
         7z a -tzip mui-green.zip mui-green
         7z a -tzip mui-red.zip mui-red
+        Move-Item -Path "*.zip" -Destination "../package/files/sitecore/shell/Themes/Standard"
         cd ..
+      shell: pwsh  
 
     - name: Zip Sitecore package
       run: |
