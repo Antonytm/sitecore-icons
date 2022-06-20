@@ -61,6 +61,7 @@ jobs:
 
     - name: Zip Sitecore package
       run: |
+        dir
         cd package
         7z a -tzip package.zip files installer metadata
         cd ..
