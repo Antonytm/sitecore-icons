@@ -5,15 +5,19 @@ on:
     branches: main
 
 env:
-  VERSION: 1.0.0{{env.GITHUB_RUN_NUMBER}}
+  VERSION: 1.0.0.${{env.GITHUB_RUN_NUMBER}}
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Info
+        run: |
+          Write-Host "Building Sitecore Icons"
+          Write-Host "Version: ${{ env.VERSION }}"
+        shell: pwsh
+
 
       - name: Checkout submodules
         run: git submodule update --init --recursive
@@ -85,13 +89,13 @@ jobs:
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files
-          7z a -tzip SitecoreIconsFull${{env.VERSION}}.zip package.zip
+          7z a -tzip SitecoreIconsFull${env:version}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
           }
           7z a -tzip package.zip installer metadata files "-xr!mui-*"
-          7z a -tzip SitecoreIconsFontAwesome${{env.VERSION}}.zip package.zip
+          7z a -tzip SitecoreIconsFontAwesome${env:version}.zip package.zip
 
           if(Test-Path -Path "package.zip") {
             Remove-Item -Path "package.zip"
