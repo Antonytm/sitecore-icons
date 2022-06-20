@@ -63,6 +63,7 @@ jobs:
       run: |
         dir
         cd package
+        dir
         7z a -tzip package.zip files installer metadata
         cd ..
 
