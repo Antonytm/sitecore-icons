@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Set Version
         run: |
-          "${env.STATIC_VERSION}${env.GITHUB_RUN_NUMBER}" >> $VERSION
+          echo "${env.STATIC_VERSION}.${env.GITHUB_RUN_NUMBER}" >> $VERSION
         shell: pwsh
       - name: Info
         run: |
