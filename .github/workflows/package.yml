@@ -283,6 +283,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package/SitecoreIcons-MUI-Red-W${{env.VERSION}}.zip
+          asset_path: ./package/SitecoreIcons-MUI-Red-${{env.VERSION}}.zip
           asset_name: SitecoreIcons-MUI-Red-${{env.VERSION}}.zip
           asset_content_type: application/zip
