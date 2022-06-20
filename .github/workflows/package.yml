@@ -19,7 +19,7 @@ jobs:
       - name: Info
         run: |
           Write-Host "Building Sitecore Icons"
-          Write-Host "Version: ${{ env.VERSION }}"
+          Write-Host "Version: ${env.VERSION }"
         shell: pwsh
 
 
