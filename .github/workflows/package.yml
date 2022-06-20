@@ -4,102 +4,185 @@ on:
   push:
     branches: main
 
+env:
+  VERSION: 1.0.0{{env.GITHUB_RUN_NUMBER}}
+
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Checkout submodules
-      run: git submodule update --init --recursive
-    
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
 
-    - name: Setup NuGet
-      uses: nuget/setup-nuget@v1
-      
-    - name: Navigate to Workspace
-      run: cd $GITHUB_WORKSPACE
-    
-    - name: Add Sitecore Nuget Feed
-      run: nuget.exe sources add -name Sitecore -source https://sitecore.myget.org/F/sc-packages/api/v3/index.json
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
 
-    - name: Restore Packages
-      run: nuget restore src/SitecoreIcons/SitecoreIcons.sln
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
 
-    - name: Build Solution
-      run: |
-        msbuild.exe src/SitecoreIcons/SitecoreIcons.sln /p:Configuration=Debug
+      - name: Navigate to Workspace
+        run: cd $GITHUB_WORKSPACE
 
-    - name: Publish Project
-      run: |
-        msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      - name: Add Sitecore Nuget Feed
+        run: nuget.exe sources add -name Sitecore -source https://sitecore.myget.org/F/sc-packages/api/v3/index.json
 
-    - name: Remove Roslyn Folder
-      run: |
-        if(Test-Path -Path "package/files/bin/roslyn") {
-          Remove-Item -Path "package/files/bin/roslyn" -Force -Recurse
-        }
-      shell: pwsh  
+      - name: Restore Packages
+        run: nuget restore src/SitecoreIcons/SitecoreIcons.sln
 
-    - name: Download ImageMagick
-      run: |
-        curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-portable-Q16-x64.zip -o tools\imagemagick.zip
-        
-    - name: Unzip ImageMagick using 7zip
-      run: |
-        7z x tools\imagemagick.zip -otools\imagemagick
+      - name: Build Solution
+        run: |
+          msbuild.exe src/SitecoreIcons/SitecoreIcons.sln /p:Configuration=Debug
 
-    - name: Run Icons build
-      run: |
-        cd scripts
-        .\main.ps1
-        cd ..
+      - name: Publish Project
+        run: |
+          msbuild.exe src/SitecoreIcons/SitecoreIcons/SitecoreIcons.csproj /p:Configuration=Debug  /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
 
-    - name: Zip Icons
-      run: |
-        cd output
-        7z a -tzip fa-black.zip fa-black
-        7z a -tzip fa-blue.zip fa-blue
-        7z a -tzip fa-green.zip fa-green
-        7z a -tzip fa-red.zip fa-red
-        7z a -tzip mui-black.zip mui-black
-        7z a -tzip mui-blue.zip mui-blue
-        7z a -tzip mui-green.zip mui-green
-        7z a -tzip mui-red.zip mui-red
-        Move-Item -Path "*.zip" -Destination "../package/files/sitecore/shell/Themes/Standard"
-        cd ..
-      shell: pwsh  
+      - name: Remove Roslyn Folder
+        run: |
+          if(Test-Path -Path "package/files/bin/roslyn") {
+            Remove-Item -Path "package/files/bin/roslyn" -Force -Recurse
+          }
+        shell: pwsh
 
-    - name: Zip Sitecore package
-      run: |
-        dir
-        cd package
-        dir
-        7z a -tzip package.zip files installer metadata
-        cd ..
+      - name: Download ImageMagick
+        run: |
+          curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-portable-Q16-x64.zip -o tools\imagemagick.zip
 
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: test
-        body_path: CHANGELOG.md
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      - name: Unzip ImageMagick using 7zip
+        run: |
+          7z x tools\imagemagick.zip -otools\imagemagick
 
-    - name: upload windows artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./package/package.zip
-        asset_name: package.zip
-        asset_content_type: application/zip
+      - name: Run Icons build
+        run: |
+          cd scripts
+          .\main.ps1
+          cd ..
+
+      - name: Zip Icons
+        run: |
+          cd output
+          7z a -tzip fa-black.zip fa-black
+          7z a -tzip fa-blue.zip fa-blue
+          7z a -tzip fa-green.zip fa-green
+          7z a -tzip fa-red.zip fa-red
+          7z a -tzip mui-black.zip mui-black
+          7z a -tzip mui-blue.zip mui-blue
+          7z a -tzip mui-green.zip mui-green
+          7z a -tzip mui-red.zip mui-red
+          Move-Item -Path "*.zip" -Destination "../package/files/sitecore/shell/Themes/Standard"
+          cd ..
+        shell: pwsh
+
+      - name: Zip Sitecore package
+        run: |
+          dir
+          cd package
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files
+          7z a -tzip SitecoreIconsFull${{env.VERSION}}.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!mui-*"
+          7z a -tzip SitecoreIconsFontAwesome${{env.VERSION}}.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*"
+          7z a -tzip SitecoreIconsMUI.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-blue*"
+          7z a -tzip SitecoreIconsMUIBlack.zip package.zip 
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-black*" "-xr!mui-red*" "-xr!mui-blue*"
+          7z a -tzip SitecoreIconsMUIGreen.zip package.zip 
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-black*" "-xr!mui-blue*"
+          7z a -tzip SitecoreIconsMUIRed.zip package.zip 
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-black*"
+          7z a -tzip SitecoreIconsMUIBlue.zip package.zip 
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!fa-*" "-xr!mui-green*" "-xr!mui-red*" "-xr!mui-blue*"
+          7z a -tzip SitecoreIconsMUIBlack.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-red*" "-xr!fa-blue*"
+          7z a -tzip SitecoreIconsFontAwesomBlack.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-black*" "-xr!fa-red*" "-xr!fa-blue*"
+          7z a -tzip SitecoreIconsFontAwesomGreen.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-black*" "-xr!fa-blue*"
+          7z a -tzip SitecoreIconsFontAwesomRed.zip package.zip
+
+          if(Test-Path -Path "package.zip") {
+            Remove-Item -Path "package.zip"
+          }
+          7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-red*" "-xr!fa-black*"
+          7z a -tzip SitecoreIconsFontAwesomBlue.zip package.zip
+          cd ..
+        shell: pwsh
+
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: test
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload Full Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIconsFull${{env.VERSION}}.zip
+          asset_name: SitecoreIconsFull${{env.VERSION}}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Font Awesome Package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./package/SitecoreIconsFontAwesome${{env.VERSION}}.zip
+          asset_name: SitecoreIconsFontAwesome${{env.VERSION}}.zip
+          asset_content_type: application/zip
