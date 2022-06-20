@@ -15,4 +15,4 @@ New-Item -Path $output -ItemType Directory
 
 # ZIP icons
 
-& .\ZipIcons.ps1 -Path $output -ThemeLocation "../package/files/sitecore/shell/Themes/Standard"
+#& .\ZipIcons.ps1 -Path $output -ThemeLocation "../package/files/sitecore/shell/Themes/Standard"

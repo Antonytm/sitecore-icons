@@ -12,6 +12,19 @@ if(Test-Path -Path "../package/files/bin/roslyn") {
 
 & .\main.ps1
 
+cd output
+& 7z a -tzip fa-black.zip fa-black
+& 7z a -tzip fa-blue.zip fa-blue
+& 7z a -tzip fa-green.zip fa-green
+& 7z a -tzip fa-red.zip fa-red
+& 7z a -tzip mui-black.zip mui-black
+& 7z a -tzip mui-blue.zip mui-blue
+& 7z a -tzip mui-green.zip mui-green
+& 7z a -tzip mui-red.zip mui-red
+Move-Item -Path "*.zip" -Destination "../package/files/sitecore/shell/Themes/Standard"
+cd ..
+
+
 cd ..\package
 
 if(Test-Path -Path "package.zip") {
