@@ -2,7 +2,7 @@ Param(
     [String] $Path = "",
     [String] $Prefix = "",
     [String] $Output = "../output/",
-    [String] $Match = "Filenames that should be processed"
+    [String] $Match = ".*"
 )
 
 $temp = "../temp/";
