@@ -12,6 +12,10 @@ if(Test-Path -Path "../package/files/bin/roslyn") {
 
 & .\main.ps1
 
+7z ${$env.paths}
+
+cd ..
+
 cd output
 & 7z a -tzip fa-black.zip fa-black
 & 7z a -tzip fa-blue.zip fa-blue
@@ -21,11 +25,14 @@ cd output
 & 7z a -tzip mui-blue.zip mui-blue
 & 7z a -tzip mui-green.zip mui-green
 & 7z a -tzip mui-red.zip mui-red
+if(Test-Path -Path "../package/files/sitecore/shell/Themes/Standard/*") {
+  Remove-Item -Path "../package/files/sitecore/shell/Themes/Standard/*" -Force -Recurse
+}
 Move-Item -Path "*.zip" -Destination "../package/files/sitecore/shell/Themes/Standard"
 cd ..
 
 
-cd ..\package
+cd package
 
 if(Test-Path -Path "package.zip") {
   Remove-Item -Path "package.zip"
@@ -99,4 +106,3 @@ if(Test-Path -Path "package.zip") {
 & 7z a -tzip package.zip installer metadata files "-xr!mui-*" "-xr!fa-green*" "-xr!fa-red*" "-xr!fa-black*"
 & 7z a -tzip SitecoreIconsFontAwesomBlue.zip package.zip
 
-cd ..\scripts
