@@ -61,7 +61,7 @@ jobs:
 
       - name: Download ImageMagick
         run: |
-          curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-portable-Q16-x64.zip -o tools\imagemagick.zip
+          curl https://imagemagick.org/archive/binaries/ImageMagick-7.1.0-57-portable-Q16-x86.zip -o tools\imagemagick.zip
 
       - name: Unzip ImageMagick using 7zip
         run: |
